@@ -1,0 +1,35 @@
+# Xcode build artifacts
+build/
+DerivedData/
+*.xcuserstate
+*.xccheckout
+*.moved-aside
+*.xcscmblueprint
+
+# User data (user-specific project settings)
+xcuserdata/
+
+# macOS files
+.DS_Store
+
+# Swift Package Manager
+.build/
+
+# CocoaPods dependencies (if you later add them)
+Pods/
+Podfile.lock
+
+# Carthage dependencies
+Carthage/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# SwiftLint
+.swiftlint-cache
+
+# Generated assets
+*.generated.swift
