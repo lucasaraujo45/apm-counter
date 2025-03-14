@@ -1,0 +1,74 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Set up Xcode – using Xcode 16.2 (adjust if needed)
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '16.2.0'
+
+      # Build the app with xcodebuild using the "ApmCounter" scheme, with output directed to the build folder
+      - name: Build App
+        run: |
+          xcodebuild clean build \
+            -scheme ApmCounter \
+            -configuration Release \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CONFIGURATION_BUILD_DIR=$(pwd)/build
+
+      # Package the built app into a ZIP archive
+      - name: Package Application into ZIP
+        run: |
+          mkdir -p Release
+          cp -R build/ApmCounter.app Release/
+          pushd Release
+          ditto -c -k --sequesterRsrc ApmCounter.app ApmCounter.zip
+          popd
+
+      # Upload the ZIP as an artifact so it can be used later in the release job
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4.6.1
+        with:
+          name: ApmCounter-macos
+          path: Release/ApmCounter.zip
+
+  release:
+    needs: build
+    runs-on: macos-latest
+    steps:
+      # Checkout the repository for proper Git context
+      - name: Checkout code for release job
+        uses: actions/checkout@v4
+
+      # Download the artifact into the Release folder
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ApmCounter-macos
+          path: Release
+
+      # Create or update the GitHub Release using the GitHub CLI (gh)
+      - name: Update GitHub Release "latest-build"
+        env:
+          # Use your Personal Access Token stored as PAT_TOKEN
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          if gh release view latest-build > /dev/null 2>&1; then
+            echo "Updating existing latest-build release"
+            gh release upload latest-build Release/ApmCounter.zip --clobber
+          else
+            echo "Creating new latest-build release"
+            gh release create latest-build --title "Latest Build" --notes "Automated build from main branch" Release/ApmCounter.zip
+          fi
