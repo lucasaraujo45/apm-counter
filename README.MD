@@ -2,13 +2,12 @@
 
 ApmCounter is a minimalist, intuitive macOS app that accurately tracks your **Actions Per Minute (APM)**. Perfect for productivity enthusiasts, developers, gamers, or anyone interested in analyzing their activity patterns.
 
+---
 
 ## 🤔 Why ApmCounter?
-
-                                                                                                                        I built ApmCounter because I wanted a simple, lightweight app to track my Actions Per Minute (APM) on macOS. After searching online, I found many requests from users looking for a macOS-friendly APM tracker, but nearly all existing solutions were Windows-only.
-
+I built ApmCounter because I wanted a simple, lightweight app to track my Actions Per Minute (APM) on macOS. After searching online, I found many requests from users looking for a macOS-friendly APM tracker, but nearly all existing solutions were Windows-only.
                                                                                                                         
----
+
 
 ## 🎯 Features
 
@@ -23,7 +22,8 @@ ApmCounter is a minimalist, intuitive macOS app that accurately tracks your **Ac
 
 ## 📸 Screenshots
 
-*(Provide some screenshots or GIFs showcasing your app here.)*
+![App Picture](assets/app-picture.png)
+
 
 ---
 
