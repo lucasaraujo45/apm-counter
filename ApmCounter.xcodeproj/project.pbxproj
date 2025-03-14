@@ -52,6 +52,11 @@
 			path = ApmCounterUITests;
 			sourceTree = "<group>";
 		};
+		8294B63B2D83C52E00F4BB7B /* assets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = assets;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +93,7 @@
 				8294B4B62D8365FB00F4BB7B /* Products */,
 				8294B5922D83B7CE00F4BB7B /* .gitignore */,
 				8294B5952D83B9A200F4BB7B /* README.MD */,
+				8294B63B2D83C52E00F4BB7B /* assets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,6 +124,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				8294B4B72D8365FB00F4BB7B /* ApmCounter */,
+				8294B63B2D83C52E00F4BB7B /* assets */,
 			);
 			name = ApmCounter;
 			packageProductDependencies = (
