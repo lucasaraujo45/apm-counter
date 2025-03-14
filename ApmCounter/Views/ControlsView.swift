@@ -37,6 +37,6 @@ struct BlueButtonStyle: ButtonStyle {
 
 struct ControlsView_Previews: PreviewProvider {
     static var previews: some View {
-        ControlsView(sessionManager: SessionManager())
+        ControlsView(sessionManager: SessionManager.shared)
     }
 }

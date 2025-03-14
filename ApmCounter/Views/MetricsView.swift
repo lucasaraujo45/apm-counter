@@ -49,6 +49,6 @@ struct MetricsView: View {
 
 struct MetricsView_Previews: PreviewProvider {
     static var previews: some View {
-        MetricsView(sessionManager: SessionManager())
+        MetricsView(sessionManager: SessionManager.shared)
     }
 }

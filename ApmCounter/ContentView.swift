@@ -3,7 +3,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedTab = 0
-    @StateObject var sessionManager = SessionManager()
+    @StateObject var sessionManager = SessionManager.shared
+
     
     var body: some View {
         VStack(spacing: 0) {

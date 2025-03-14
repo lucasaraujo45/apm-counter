@@ -111,7 +111,7 @@ struct GraphView: View {
 
 struct GraphView_Previews: PreviewProvider {
     static var previews: some View {
-        GraphView(sessionManager: SessionManager())
+        GraphView(sessionManager: SessionManager.shared)
             .frame(minWidth: 400, minHeight: 200)
     }
 }

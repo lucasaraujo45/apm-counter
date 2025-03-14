@@ -1,5 +1,4 @@
-//
-//  Models/SessionData.swift
+//Models/SessionData.swift
 
 import Foundation
 

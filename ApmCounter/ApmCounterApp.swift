@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct AmpCounterApp: App {
+struct ApmCounterApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
@@ -10,7 +10,7 @@ struct AmpCounterApp: App {
                 .background(WindowAccessor { window in
                     window.level = .floating
                     window.isOpaque = true
-                    window.title = "AmpCounter"
+                    window.title = "ApmCounter"
                     window.styleMask.remove(.resizable) // Prevent resizing
                     window.standardWindowButton(.zoomButton)?.isEnabled = false
                 })

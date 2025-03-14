@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8294B5942D83B7D700F4BB7B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8294B5922D83B7CE00F4BB7B /* .gitignore */; };
+		8294B5962D83B9AA00F4BB7B /* README.MD in Resources */ = {isa = PBXBuildFile; fileRef = 8294B5952D83B9A200F4BB7B /* README.MD */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8294B4CA2D8365FC00F4BB7B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +32,8 @@
 		8294B4B52D8365FB00F4BB7B /* ApmCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApmCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8294B4C92D8365FC00F4BB7B /* ApmCounterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApmCounterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8294B4D32D8365FC00F4BB7B /* ApmCounterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApmCounterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8294B5922D83B7CE00F4BB7B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		8294B5952D83B9A200F4BB7B /* README.MD */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.MD; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -79,6 +86,8 @@
 				8294B4CC2D8365FC00F4BB7B /* ApmCounterTests */,
 				8294B4D62D8365FC00F4BB7B /* ApmCounterUITests */,
 				8294B4B62D8365FB00F4BB7B /* Products */,
+				8294B5922D83B7CE00F4BB7B /* .gitignore */,
+				8294B5952D83B9A200F4BB7B /* README.MD */,
 			);
 			sourceTree = "<group>";
 		};
@@ -212,6 +221,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8294B5942D83B7D700F4BB7B /* .gitignore in Resources */,
+				8294B5962D83B9AA00F4BB7B /* README.MD in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
