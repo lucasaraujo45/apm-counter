@@ -33,7 +33,7 @@ jobs:
           popd
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: ApmCounter-macos
           path: Release/ApmCounter.zip
