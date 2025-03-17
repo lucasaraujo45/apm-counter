@@ -9,7 +9,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Xcode
         uses: maxim-lobanov/setup-xcode@v1
@@ -19,33 +19,39 @@ jobs:
       - name: Build App
         run: |
           xcodebuild clean build \
-            -scheme ApmCounter \
+            -scheme AmpCounter \
             -configuration Release \
             CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO
+            CODE_SIGNING_REQUIRED=NO \
+            CONFIGURATION_BUILD_DIR=$(pwd)/build
 
       - name: Package Application into .zip
         run: |
           mkdir -p Release
-          cp -R build/Release/ApmCounter.app Release
+          cp -R build/AmpCounter.app Release
           pushd Release
-          ditto -c -k --sequesterRsrc ApmCounter.app ApmCounter.zip
+          ditto -c -k --sequesterRsrc AmpCounter.app AmpCounter.zip
           popd
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v2
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4.6.1
         with:
-          name: ApmCounter-macos
-          path: Release/ApmCounter.zip
+          name: AmpCounter-macos
+          path: Release/AmpCounter.zip
+          # Optional:
+          # if-no-files-found: warn
+          # retention-days: 7
+          # compression-level: 6
+          # overwrite: true
 
   release:
     needs: build
     runs-on: macos-latest
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v3
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
         with:
-          name: ApmCounter-macos
+          name: AmpCounter-macos
 
       - name: Update GitHub Release "latest-build"
         env:
@@ -53,8 +59,8 @@ jobs:
         run: |
           if gh release view latest-build > /dev/null 2>&1; then
             echo "Updating existing latest-build release"
-            gh release upload latest-build Release/ApmCounter.zip --clobber
+            gh release upload latest-build Release/AmpCounter.zip --clobber
           else
             echo "Creating new latest-build release"
-            gh release create latest-build --title "Latest Build" --notes "Automated build from main branch" Release/ApmCounter.zip
+            gh release create latest-build --title "Latest Build" --notes "Automated build from main branch" Release/AmpCounter.zip
           fi
