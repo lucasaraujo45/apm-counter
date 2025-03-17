@@ -19,7 +19,7 @@ jobs:
       - name: Build App
         run: |
           xcodebuild clean build \
-            -scheme AmpCounter \
+            -scheme ApmCounter \
             -configuration Release \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
@@ -28,16 +28,16 @@ jobs:
       - name: Package Application into .zip
         run: |
           mkdir -p Release
-          cp -R build/AmpCounter.app Release
+          cp -R build/ApmCounter.app Release
           pushd Release
-          ditto -c -k --sequesterRsrc AmpCounter.app AmpCounter.zip
+          ditto -c -k --sequesterRsrc ApmCounter.app ApmCounter.zip
           popd
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4.6.1
         with:
-          name: AmpCounter-macos
-          path: Release/AmpCounter.zip
+          name: ApmCounter-macos
+          path: Release/ApmCounter.zip
           # Optional:
           # if-no-files-found: warn
           # retention-days: 7
@@ -51,7 +51,7 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
-          name: AmpCounter-macos
+          name: ApmCounter-macos
 
       - name: Update GitHub Release "latest-build"
         env:
@@ -59,8 +59,8 @@ jobs:
         run: |
           if gh release view latest-build > /dev/null 2>&1; then
             echo "Updating existing latest-build release"
-            gh release upload latest-build Release/AmpCounter.zip --clobber
+            gh release upload latest-build Release/ApmCounter.zip --clobber
           else
             echo "Creating new latest-build release"
-            gh release create latest-build --title "Latest Build" --notes "Automated build from main branch" Release/AmpCounter.zip
+            gh release create latest-build --title "Latest Build" --notes "Automated build from main branch" Release/ApmCounter.zip
           fi
