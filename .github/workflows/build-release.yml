@@ -48,6 +48,9 @@ jobs:
     needs: build
     runs-on: macos-latest
     steps:
+      - name: Checkout code for release job
+        uses: actions/checkout@v4
+
       - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
