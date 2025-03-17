@@ -1,0 +1,60 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '14.0'
+
+      - name: Build App
+        run: |
+          xcodebuild clean build \
+            -scheme ApmCounter \
+            -configuration Release \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO
+
+      - name: Package Application into .zip
+        run: |
+          mkdir -p Release
+          cp -R build/Release/ApmCounter.app Release
+          pushd Release
+          ditto -c -k --sequesterRsrc ApmCounter.app ApmCounter.zip
+          popd
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ApmCounter-macos
+          path: Release/ApmCounter.zip
+
+  release:
+    needs: build
+    runs-on: macos-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ApmCounter-macos
+
+      - name: Update GitHub Release "latest-build"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release view latest-build > /dev/null 2>&1; then
+            echo "Updating existing latest-build release"
+            gh release upload latest-build Release/ApmCounter.zip --clobber
+          else
+            echo "Creating new latest-build release"
+            gh release create latest-build --title "Latest Build" --notes "Automated build from main branch" Release/ApmCounter.zip
+          fi
